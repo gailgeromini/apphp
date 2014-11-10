@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.0" type="module">
+    <name>Setup Module</name>
+    <creationDate>01/02/2013</creationDate>
+    <lastChangedDate>26/03/2013</lastChangedDate>
+    <author>ApPHP</author>
+    <authorEmail></authorEmail>
+    <authorUrl></authorUrl>
+    <copyright>ApPHP</copyright>
+    <license>LGPL</license>
+    <version>0.0.2</version>
+    <description>Application Setup Module for ApPHP Framework</description>
+    <icon></icon>
+    <manual></manual>
+    <files>
+        <controllers>
+            <filename>SetupController.php</filename>
+        </controllers>
+        <models>
+            <filename>Setup.php</filename>
+        </models>
+        <views>
+            <error>
+                <filename>index.php</filename>
+            </error>
+            <setup>
+                <filename>administrator.php</filename>
+                <filename>completed.php</filename>
+                <filename>database.php</filename>
+                <filename>error.php</filename>
+                <filename>index.php</filename>
+                <filename>ready.php</filename>
+            </setup>
+        </views>
+        <setup>
+            <css>
+                <filename>main.php</filename>    
+            </css>
+            <filename>default.php</filename>
+        </setup>
+        <xml>        
+            <filename>info.xml</filename>
+        </xml>        
+    </files>
+    <installationPaths>
+        <path>
+            <name>models</name>
+            <directories>
+                <directory>controllers</directory>
+                <directory>models</directory>
+                <directory>views</directory>
+            </directories>
+        </path>
+        <path>
+            <name>templates</name>
+            <directories>
+                <directory>setup</directory>
+            </directories>
+        </path>
+    </installationPaths>
+</install>

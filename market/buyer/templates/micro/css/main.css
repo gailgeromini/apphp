@@ -1,0 +1,178 @@
+@import url("reset.css");
+
+body {
+	
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 8pt;
+	color: #222222;
+}
+
+a {
+	text-decoration: none;
+	color: #292D38;
+}
+
+h1 {
+	font-size: 16pt;
+}
+
+h2 {
+	font-size: 14pt;
+}
+
+h3 {
+	font-size: 12pt;
+}
+
+h4 {
+	font-size: 10pt;
+}
+
+h5 {
+	font-size: 9pt;
+}
+
+h6 {
+	text-transform: uppercase;
+	color: #999999;
+	font-size: 8pt;
+}
+
+#page {
+	-webkit-box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
+	-moz-box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
+	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.8);
+
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+
+	background-color: #ffffff;
+	margin: 10% auto 0px;
+	overflow: hidden;
+	width: 360px;
+}
+
+body.processor #page{
+	width:560px!important;
+}
+body.animated #page {
+	filter: alpha(opacity=0);
+	margin-top: 0px;
+	opacity: 0;
+}
+#page > header {
+	margin: 20px;
+	overflow: hidden;
+}
+
+#page > header.divider {
+padding-bottom: 16px;
+	border-bottom: 1px solid #eaeaea;
+}
+
+#page > header h2 {
+margin-top: 4px;
+float: left;
+}
+
+#page > header .switcher {
+
+float: right;
+}
+
+#page > p {
+	line-height: 160%;
+	color: #777777;
+	margin: 20px;
+}
+
+
+.form .field, .form .actions {
+display: block;
+}
+
+.form .field label, .form .field .controls, .form .actions .controls {
+display: block;
+width: 320px;
+float: none;
+}
+
+
+
+
+
+.form .field {
+padding: 20px 20px 0px 20px;
+}
+
+.form .field label {
+	margin-bottom: 8px;
+
+}
+
+.form .field small {
+	font-weight: normal;
+	display: block;
+	padding-top: 4px;
+	font-size: 7pt;
+	color: #777777;
+}
+
+.form .field p {
+	margin-top: 5px;
+	font-size: 7pt;
+	display: block;
+	color: #999999;
+}
+
+.form .field.success p {
+	color: #065500;
+}
+
+.form .field.success .input {
+	border: 1px solid #41a73a;
+	color: #065500;
+}
+
+.form .field.error p {
+	color: #650e0e;
+}
+
+.form .field.error .input {
+	border: 1px solid #bc5f5f;
+	color: #650e0e;
+}
+
+.form .actions span {
+	margin: 0px 5px;
+	color: #999999;
+}
+
+
+
+
+
+
+
+.form .actions {
+	-webkit-border-radius: 0px 0px 3px 3px;
+	-moz-border-radius: 0px 0px 3px 3px;
+	border-radius: 0px 0px 3px 3px;
+	margin-top: 20px;
+	background-color: #f8f8f8;
+	padding: 15px 20px;
+}
+
+div.checker {
+	float: right !important;
+	margin-top: 3px;
+}
+
+.msg {
+margin: 20px;
+}
+
+.msg + .msg {
+margin-top: -15px;
+}

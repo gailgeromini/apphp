@@ -1,0 +1,44 @@
+table .header {
+	cursor: pointer;
+}
+
+table .header:after {
+	content: "";
+	border-color: #000000 transparent;
+	border-width: 0px 4px 4px;
+	margin: 4px 0px -6px;
+	border-style: solid;
+	visibility: hidden;
+	float: right;
+}
+
+table .headerSortUp, table .headerSortDown {
+	background-color: #f8f8f8;
+}
+
+table .header:hover:after {
+	visibility: visible;
+}
+
+table .headerSortDown:after, table .headerSortDown:hover:after {
+	filter: alpha(opacity=60);
+	-khtml-opacity: 0.6;
+	visibility: visible;
+	-moz-opacity: 0.6;
+	opacity: 0.6;
+}
+
+table .headerSortUp:after {
+	border-right: 4px solid transparent;
+	border-left: 4px solid transparent;
+	border-top: 4px solid #000;
+	filter: alpha(opacity=60);
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	border-bottom: none;
+	visibility: visible;
+	-khtml-opacity: 0.6;
+	-moz-opacity: 0.6;
+	box-shadow: none;
+	opacity: 0.6;
+}
