@@ -132,4 +132,45 @@ class BuyController extends CController
 		$this->view->pagination=$model->pagination;
 		$this->view->render('buy/bulk');
 	}
+
+    public function accountsAction($page = null)
+    {
+        $cRequest = A::app()->getRequest();
+        $session = A::app()->getSession();
+        $model = new Accounts();
+        $act =  isset($_REQUEST['act']) ? trim($_REQUEST['act']) : "";
+        if($cRequest->getPost('act') == 'search'){
+            $this->view->type = $cRequest->getPost('type');
+            $this->view->category = $cRequest->getPost('category');
+            $this->view->country = $cRequest->getPost('country');
+            $session->set('awhere',$model::buildAWhere($this->view->category, $this->view->country, $this->view->type));
+        }
+        elseif($act == 'addcarts'){
+            $listCards = $_REQUEST['cards'];
+            $message = $model->addToCarts($listCards);
+            $this->view->Messages = $message["message"];
+            $this->view->Mtype = $message["type"];
+        }
+        if($cRequest->getPost('action') == 'Show All Accounts'){
+            $model::removeAWhere();
+        }
+        $this->view->currentPage = isset($page) ? $page : 1;
+        $this->view->targetPath = 'buy/accounts';
+        $this->view->pageSize = 1;
+        $model->buildRefactorPaging(
+            $this->view->targetPath, 	//  set targetPath
+            $this->view->currentPage, // set currentPage
+            $this->view->pageSize, // set pageSize
+            A::app()->getSession()->get('awhere')
+        );
+        // assigned gridviews with page range
+        $this->view->cDroplist=$model::cDropList(A::app()->getSession()->get('acountry'));
+        $this->view->tDroplist=$model::tDropList(A::app()->getSession()->get('atype'));
+        $this->view->ctDroplist=$model::ctDropList(A::app()->getSession()->get('acategory'));
+        $this->view->accounts =$model->gridviews;
+        // assigned pagination html
+        $this->view->pagination=$model->pagination;
+        $this->view->render('buy/accounts');
+
+    }
 }

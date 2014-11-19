@@ -31,7 +31,7 @@ return array(
 						array('label'=>'Credit Cards', 'url'=>'buy/cards'),
 						array('label'=>'Paypal Account', 'url'=>'buy/paypals'),
 						array('label'=>'Bulk Email', 'url'=>'buy/bulk'),
-						array('label'=>'Account Login', 'url'=>'javascript:;'),
+						array('label'=>'Account Login', 'url'=>'buy/accounts'),
 						
 				),
 				'deposit' =>array(
@@ -42,7 +42,7 @@ return array(
 						array('label'=>'Credit Cards', 'url'=>'order/cards'),
 						array('label'=>'Paypal Account', 'url'=>'order/paypals'),
 						array('label'=>'Bulk Email', 'url'=>'order/bulk'),
-						array('label'=>'Account Login', 'url'=>'javascript:;'),
+						array('label'=>'Account Login', 'url'=>'order/accounts'),
 						
 				),
 				'ticket' =>array(

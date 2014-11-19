@@ -6,7 +6,7 @@ return array(
 				'host' => 'localhost',
 				'database' => 'bz_prod',
 				'username' => 'root',
-				'password' => '3e11a7723bf4',
+				'password' => '',
 				'prefix' => '',
 		)
 );
