@@ -4,7 +4,7 @@ return array(
 		'db' => array(
 				'type' => 'mysql',
 				'host' => 'localhost',
-				'database' => 'bz_prod',
+				'database' => 'opps',
 				'username' => 'root',
 				'password' => '',
 				'prefix' => '',

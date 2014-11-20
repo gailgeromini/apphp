@@ -4,9 +4,9 @@ return array(
 		'db' => array(
 				'type' => 'mysql',
 				'host' => 'localhost',
-				'database' => 'bz_prod',
+				'database' => 'opps',
 				'username' => 'root',
-				'password' => '3e11a7723bf4',
+				'password' => '',
 				'prefix' => '',
 		)
 );

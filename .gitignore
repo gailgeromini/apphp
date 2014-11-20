@@ -21,4 +21,5 @@ nbproject
 /.project
 
 /framework/tmp/*
-/market/buyer/protected/config/*
+/market/buyer/protected/config/db.php
+/market/backend/protected/config/db.php

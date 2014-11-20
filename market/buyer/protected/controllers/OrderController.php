@@ -58,31 +58,7 @@ class OrderController extends CController
 		$this->view->render('order/cards');
 	
 	}
-	public function bulkAction($file=null,$page=null)
-	{
-		$model = new Order();
-		$this->view->currentPage = isset($page) ? $page : 1;
-		$file = isset($file) ? trim($file) : "null";
-		$this->view->targetPath = 'order/bulk/file/';
-		$this->view->pageSize = 10;
-		if(!empty($file) && $file != "null"){
-				$return_file=file_get_contents("http://www.opps.sx/buyer/tmp/".$file);
-				header("Content-type: text/txt");
-				echo $return_file;
-				exit();
-		}
-		$model->buildBulkOrderRefactorPaging(
-				$this->view->targetPath, 	//  set targetPath
-				$this->view->currentPage, // set currentPage
-				$this->view->pageSize, // set pageSize
-				''
-		);
-		$this->view->bulk =$model->gridviews;
-		// assigned pagination html
-		$this->view->pagination=$model->pagination;
-		$this->view->render('order/bulk');
-	
-	}
+
 	public function paypalsAction($page=null)
 	{
 		$model = new Order();

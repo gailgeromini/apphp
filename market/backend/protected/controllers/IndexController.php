@@ -18,7 +18,9 @@ class IndexController extends CController
 	
 	public function indexAction()
 	{
-		$this->view->render('index/index');
+		$model = new Console();
+		$this->view->console = $model->buildLogsConsole();
+		$this->view->render('console/index');
 	}
 	
 }

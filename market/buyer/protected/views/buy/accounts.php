@@ -95,7 +95,7 @@
                         if(A::app()->getSession()->get('fee') != ''){
                             echo "<span style='font-size:8.5px;color:#E02323;'> ( +".A::app()->getSession()->get('fee')." $ )</span>";
                         }else echo "No Fee"?></td>
-                    <th><input type="number" min="0" id="all"></th>
+                    <td><input type="number" min="0" id="items" name="items_<?php echo $row['image_map_id']?>" value="10" style="width: 50px; font-size: 11px; padding: 6px;"> <input type="button" class="btn" value="Add to cart" onclick="addtocart();"></td>
                 </tr>
 
             <?php }?>

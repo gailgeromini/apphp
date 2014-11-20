@@ -106,33 +106,7 @@ class BuyController extends CController
 		$this->view->render('buy/paypals');
 	
 	}
-	public function bulkAction($page=null)
-	{
-		$cRequest = A::app()->getRequest();
-		$this->view->currentPage = isset($page) ? $page : 1;
-		$this->view->targetPath = 'buy/bulk';
-		$this->view->pageSize = 20;
-		$this->view->standalone = true ;
-		$model = new Bulk();
-		if($cRequest->getPost('act') == 'buy'){
-			$listBulk = $cRequest->getPost('bulk');
-			$message = $model->bulkCheckout($listBulk);
-			$this->view->Messages = $message["message"];
-			$this->view->Mtype = $message["type"];
-		}
-		// call refactor pagination class
-		$model->buildRefactorPaging(
-				$this->view->targetPath, 	//  set targetPath
-				$this->view->currentPage, // set currentPage
-				$this->view->pageSize // set pageSize
-		);
-		// assigned gridviews with page range
-		$this->view->bulk =$model->gridviews;
-		// assigned pagination html
-		$this->view->pagination=$model->pagination;
-		$this->view->render('buy/bulk');
-	}
-
+	
     public function accountsAction($page = null)
     {
         $cRequest = A::app()->getRequest();
@@ -156,7 +130,7 @@ class BuyController extends CController
         }
         $this->view->currentPage = isset($page) ? $page : 1;
         $this->view->targetPath = 'buy/accounts';
-        $this->view->pageSize = 1;
+        $this->view->pageSize = 20;
         $model->buildRefactorPaging(
             $this->view->targetPath, 	//  set targetPath
             $this->view->currentPage, // set currentPage
