@@ -62,14 +62,16 @@
                 <col class="grid1">
                 <col class="grid1">
                 <col class="grid1">
+                <col class="grid1">
             </colgroup>
             <thead>
             <tr>
 
                 <th>TYPE</th>
+                <th>ACCOUNT</th>
                 <th>TOTAL</th>
-                <th>GROUP</th>
-                <th>COST($)</th>
+                <th>COUNTRY</th>
+                <th>UNIT COST($)</th>
                 <th>FEE($)</th>
                 <th>QUANLITY</th>
             </tr>
@@ -82,7 +84,8 @@
             {?>
                 <tr>
                     <td><?php echo CHtml::image("templates/default/files/images/".$row['image_map_uri'])?></td>
-                    <td><?php echo $row['image_map_name'];?> (<?php echo ($row['numbers']);?>)</td>
+                    <td><?php echo $row['image_map_name'];?></td>
+                    <td><?php echo ($row['numbers']);?></td>
                     <td><?php echo (!empty(A::app()->getSession()->get('acountry')) && A::app()->getSession()->get('acountry') != 'all')?A::app()->getSession()->get('acountry'):'N/A';?></td>
                     <td><?php
                         echo  ($row['account_price'] + A::app()->getSession()->get('fee')) - (($row['account_price'] * $row['discount']) / 100)."$";
@@ -95,7 +98,7 @@
                         if(A::app()->getSession()->get('fee') != ''){
                             echo "<span style='font-size:8.5px;color:#E02323;'> ( +".A::app()->getSession()->get('fee')." $ )</span>";
                         }else echo "No Fee"?></td>
-                    <td><input type="number" min="0" id="items" name="items_<?php echo $row['image_map_id']?>" value="10" style="width: 50px; font-size: 11px; padding: 6px;"> <input type="button" class="btn" value="Add to cart" onclick="addtocart();"></td>
+                    <td><input type="number" min="0" id="items" name="items_<?php echo $row['image_map_id']?>" value="0" style="width: 50px; font-size: 11px; padding: 6px;"></td>
                 </tr>
 
             <?php }?>

@@ -21,7 +21,7 @@ class Cart extends CModel
 		}
 		$row = $CModel->db->select("
             SELECT * FROM ".$table."
-			WHERE ".$item_id." = :item_id ",
+			WHERE ".$item_id." = :item_id",
 				array(
 						':item_id' => $id,
 				)
@@ -93,6 +93,22 @@ class Cart extends CModel
 				array(
 						':is_paid' => 0,
 						':cart_type' => 2,
+						':user_id' => CAuth::getLoggedId(),
+				)
+		);
+		return $row;
+	}
+	
+	public function buildAccountsToCart(){
+		$CModel = new CModel();
+		$row = $CModel->db->select("
+		SELECT * FROM carts
+		LEFT JOIN image_mapping ON (carts.cart_item = image_mapping.image_map_id)
+		WHERE is_paid = :is_paid AND user_id = :user_id AND cart_type = :cart_type
+		ORDER BY cart_id DESC",
+				array(
+						':is_paid' => 0,
+						':cart_type' => 3,
 						':user_id' => CAuth::getLoggedId(),
 				)
 		);

@@ -112,6 +112,49 @@
 						</tbody>
 					</table>
 					<br/><br/>
+					
+					<h4>Account Login</h4><br/>
+					<table class="table ">
+						<colgroup>
+						<col class="grid1">
+						<col class="grid1">
+		                <col class="grid1">
+		                <col class="grid1">
+		                <col class="grid1">
+		                <col class="grid1">
+		                <col class="grid1">
+						</colgroup>
+						<thead>
+							<tr>
+							<th>TYPE</th>
+							<th>ITEM</th>
+							<th>COUNTRY</th>
+			                <th>ACCOUNT</th>
+			                <th>DATE</th>
+							<th>COST($)</th>
+							<th>ACTION</th>
+							</tr>
+						</thead>
+						<tbody>
+					<?php
+					$accounts = $this->accounts;
+					//var_dump($accounts);
+						foreach ($accounts as $row)
+							{ ?>	
+							<tr>
+								<td><?php echo CHtml::image("templates/default/files/images/".$row['image_map_uri'])?></td>
+								<td><?php echo CRefactorUltilities::replSOject('',5,' ********')?></td>
+								<td><?php echo !empty($row['cart_follow'])?CRefactorUltilities::flagsObject(strtolower($row['cart_follow']))." ".$row['cart_follow']:'N/A'?></td>
+								<td><?php echo $row['image_map_name']?> (<?php echo $row['cart_quantity']?>)</td>
+								<td><?php echo $row['cart_date']?></td>
+								<td><?php echo $row['cart_price']?>$</td>
+								<td><a class="btn" href="cart/delete/id/<?php echo $row['cart_id'];?>" onclick="javascript: if (!confirm('Are you sure you want to delete this item from cart?')) { return false; }">Remove</a></td>
+							</tr>
+						<?php }?>
+						</tbody>
+					</table>
+					<br/><br/>
+					
 					<div class="actions">
 						<div class="controls">
 							<a href="cart/checkout" class="btn action" onclick="javascript: if (!confirm('Are you sure you want to checkout all items from cart?')) { return false; }">Checkout</a>

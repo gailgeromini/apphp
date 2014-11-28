@@ -1,8 +1,9 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 class BuyController extends CController
 {
-    
+
 	public function __construct()
 	{
        parent::__construct();
@@ -120,8 +121,14 @@ class BuyController extends CController
             $session->set('awhere',$model::buildAWhere($this->view->category, $this->view->country, $this->view->type));
         }
         elseif($act == 'addcarts'){
-            $listCards = $_REQUEST['cards'];
-            $message = $model->addToCarts($listCards);
+        	$items = array();
+            foreach($_REQUEST as $key => $value){
+            		if($value > 0 && str_replace('items_', '', $key) > 0){
+		        		$key = str_replace('items_', '', $key);
+		        		$items[$key]=$value;
+            		}
+        	}
+            $message = $model->addToCarts($items);
             $this->view->Messages = $message["message"];
             $this->view->Mtype = $message["type"];
         }

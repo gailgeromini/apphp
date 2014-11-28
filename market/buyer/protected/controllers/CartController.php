@@ -22,6 +22,7 @@ class CartController extends CController
 		$model = new Cart();
 		$this->view->cards =$model->buildCardsToCart();
 		$this->view->paypals =$model->buildPaypalsToCart();
+		$this->view->accounts =$model->buildAccountsToCart();
 		$this->view->render('cart/index');
 	}
 	public function deleteAction($id = null){
@@ -39,6 +40,7 @@ class CartController extends CController
 		$model = new Cart();
 		$this->view->cards =$model->buildCardsToCart();
 		$this->view->paypals =$model->buildPaypalsToCart();
+		$this->view->accounts =$model->buildAccountsToCart();
 		$this->view->render('cart/index');
 	}
 	public function checkoutAction(){
