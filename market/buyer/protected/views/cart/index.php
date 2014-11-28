@@ -18,7 +18,7 @@
 						</script>
 					<?php }?>
 					<br/>
-					<h4>Credit Cards</h4><br/>
+					<ul id="breadcrumbs" class="breadcrumbs" style="margin:0px;"><li class=""><h4>Credit Cards</h4></li></ul>
 					<table class="table ">
 						<colgroup>
 							<col class="grid2">
@@ -63,7 +63,7 @@
 						<?php }?>
 						</tbody>
 					</table><br/><br/>
-					<h4>Paypal Account</h4><br/>
+					<ul id="breadcrumbs" class="breadcrumbs" style="margin:0px;"><li class=""><h4>Paypal Account</h4></li></ul>
 					<table class="table ">
 						<colgroup>
 							<col class="grid1">
@@ -112,8 +112,7 @@
 						</tbody>
 					</table>
 					<br/><br/>
-					
-					<h4>Account Login</h4><br/>
+					<ul id="breadcrumbs" class="breadcrumbs" style="margin:0px;"><li class=""><h4>Account Login</h4></li></ul>
 					<table class="table ">
 						<colgroup>
 						<col class="grid1">
@@ -144,7 +143,7 @@
 							<tr>
 								<td><?php echo CHtml::image("templates/default/files/images/".$row['image_map_uri'])?></td>
 								<td><?php echo CRefactorUltilities::replSOject('',5,' ********')?></td>
-								<td><?php echo !empty($row['cart_follow'])?CRefactorUltilities::flagsObject(strtolower($row['cart_follow']))." ".$row['cart_follow']:'N/A'?></td>
+								<td><?php echo ($row['cart_follow'] != 'all')?CRefactorUltilities::flagsObject(strtolower($row['cart_follow']))." ".$row['cart_follow']:'N/A'?></td>
 								<td><?php echo $row['image_map_name']?> (<?php echo $row['cart_quantity']?>)</td>
 								<td><?php echo $row['cart_date']?></td>
 								<td><?php echo $row['cart_price']?>$</td>

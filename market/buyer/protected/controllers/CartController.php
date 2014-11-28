@@ -50,6 +50,7 @@ class CartController extends CController
 		$this->view->Mtype = $message["type"];
 		$this->view->cards =$model->buildCardsToCart();
 		$this->view->paypals =$model->buildPaypalsToCart();
+		$this->view->accounts =$model->buildAccountsToCart();
 		$this->view->render('cart/index');
 	}
 	

@@ -1,5 +1,4 @@
 <?php
-
 class Cart extends CModel
 {
 	private static $excluded = '';
@@ -202,37 +201,57 @@ class Cart extends CModel
 			return false;
 		}else return true;
 	}
-	private static function processUpdateItem($id,$type,$cart_id){
+	private static function processUpdateAccount($account_type,$quantity){
+		$CModel = new CModel();
+		for($i=0;$i < $quantity;$i++){
+				$data = array(
+						'account_used_date' => date( 'Y-m-d H:i:s', time() ),
+						'account_used_by'=>CAuth::getLoggedId(),
+				);
+				$aWhere = "account_used_by =0 LIMIT 1";
+				$CModel->db->update('accounts',
+						$data,
+						$aWhere
+				);
+		}
+		
+		if($CModel->db->getErrorMessage()){
+			return false;
+		}else return true;
+	}
+	private static function processUpdateItem($id,$type,$cart_id,$quantity){
 		$CModel = new CModel();
 		switch ($type){
 			case 1: $table = 'cards';
-			$item_id = 'card_id';
-			$used_by = 'card_used_by';
-			$data = array(
-						'card_used_date'=> date( 'Y-m-d H:i:s', time() ),
-						'card_used_by'=>CAuth::getLoggedId(),
-					);
-			break;
+					$item_id = 'card_id';
+					$used_by = 'card_used_by';
+					$data = array(
+								'card_used_date'=> date( 'Y-m-d H:i:s', time() ),
+								'card_used_by'=>CAuth::getLoggedId(),
+							);
+				break;
 			case 2: $table = 'paypals';
-			$item_id = 'paypal_id';
-			$used_by = 'paypal_used_by';
-			$data = array(
-						'paypal_used_date' => date( 'Y-m-d H:i:s', time() ),
-						'paypal_used_by'=>CAuth::getLoggedId(),
-				);
-			break;
+					$item_id = 'paypal_id';
+					$used_by = 'paypal_used_by';
+					$data = array(
+								'paypal_used_date' => date( 'Y-m-d H:i:s', time() ),
+								'paypal_used_by'=>CAuth::getLoggedId(),
+						);
+				break;
+			case 3: 
+					return self::processUpdateAccount($id,$quantity); // return method processUpdateAccount()
+				break;
 		}
-		
 		if(self::ItemExisting($id, $type)){ // check item valid or invalid
 			return $CModel->db->update($table,
-				$data,
-				$item_id.'='.$id.' AND '.$used_by.'=0'
+					$data,
+					$item_id.'='.$id.' AND '.$used_by.'=0'
 			);
 		}else{
 			self::processRemoveCart($cart_id); // remove cart id
 			self::$excluded = 1;
 			return false;
-		} 
+		}
 	}
 	private static function processUpdateCart($id,$cart_session){
 		$CModel = new CModel();
@@ -249,7 +268,7 @@ class Cart extends CModel
 	}
 	private static function processCheckOut($ojbArray,$cart_session){
 		
-		if(self::processUpdateItem($ojbArray['cart_item'], $ojbArray['cart_type'],$ojbArray['cart_id'])){
+		if(self::processUpdateItem($ojbArray['cart_item'], $ojbArray['cart_type'],$ojbArray['cart_id'],$ojbArray['cart_quantity'])){
 			self::processUpdateCredit($ojbArray['cart_price']);// update balance user
 			self::processUpdateCart($ojbArray['cart_id'],$cart_session); // update cart 
 		}else return false;

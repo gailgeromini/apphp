@@ -132,7 +132,7 @@ class Accounts extends CModel
                         $list .=$ojb.",";
                 }
                 return array (
-                    'message'=>count($ojbArray)." card(s) was successfully added to your cart. <a href='cart'><code>Checkout your cart</code></a>",
+                    'message'=>count($ojbArray)." account(s) was successfully added to your cart. <a href='cart'><code>Checkout your cart</code></a>",
                     'type'=> 'success',
                 );}
             catch (Exception $e) {
@@ -144,9 +144,9 @@ class Accounts extends CModel
 
         }else
             return array (
-                'message'=>"As you requested , your card(s) does not found. Try different card(s) !",
+                'message'=>"As you requested , your account(s) does not found. Try different account(s) !",
                 'type'=> 'error',
-            );
+        );
     }
     public static function buildAWhere($category,$country,$type){
         /*
