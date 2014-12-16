@@ -24,6 +24,23 @@ class News extends CModel
         	
             return false;        
         }        
-    }  
+    }
+    public function blockNews1($number='')
+    {
 
+        $result = $this->db->select('
+            SELECT news_title,news_content,news_create
+            FROM '.CConfig::get('db.prefix').'news
+            WHERE is_notification = 1
+            ORDER BY news_id DESC LIMIT '.$number.'            '
+        );
+        if(!empty($result)){
+
+            return $result;
+
+        }else{
+
+            return false;
+        }
+    }
 }

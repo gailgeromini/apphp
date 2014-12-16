@@ -25,8 +25,10 @@ class IndexController extends CController
 		$model = new News();
 		// retrieve all records from DB
 		$records = $model->blockNews(5);
+		$records1 = $model->blockNews1(5);
 		// assign data to the view variables
 		$this->view->records = $records;
+		$this->view->records1 = $records1;
 		// pass prepared data to the view file
 		$this->view->render('index/index');
 	}

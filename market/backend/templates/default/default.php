@@ -65,7 +65,8 @@
 					<li class="<?php echo (($activeLink == 'users') ? ' active' : ''); ?>" ><a href="users">Users<small><?php echo CRefactorAdmin::getTotalUserActive()?></small></a></li>
 					<li class="<?php echo (($activeLink == 'cards') ? ' active' : ''); ?>" ><a href="cards">Credits Card<small><?php echo CRefactorAdmin::getTotalCardUnUsed()?></small></a></li>
 					<li class="<?php echo (($activeLink == 'paypals') ? ' active' : ''); ?>" ><a href="paypals">Paypals<small><?php echo CRefactorAdmin::getTotalPaypalUnUsed()?></small></a></li>
-                    <li class="<?php echo (($activeLink == 'accounts') ? ' active' : ''); ?>" ><a href="accounts">Accounts<small><?php ?></small></a></li>
+                    <li class="<?php echo (($activeLink == 'accounts') ? ' active' : ''); ?>" ><a href="accounts">Accounts<small><?php echo CRefactorAdmin::getTotalAccountUnUsed()?></small></a></li>
+                    <li class="<?php echo (($activeLink == 'news') ? ' active' : ''); ?>" ><a href="news">News<small><?php echo CRefactorAdmin::getTotalNews()?></small></a></li>
                     <li class="<?php echo (($activeLink == 'deposit') ? ' active' : ''); ?>" ><a href="deposit">Deposit <small><?php echo CRefactorAdmin::getTotalPayment()?></small></a></li>
 					<li class="<?php echo (($activeLink == 'ticket') ? ' active' : ''); ?>" ><a href="ticket">Tickets <small><?php echo CRefactorAdmin::getTotalAdminTicket()?></small></a></li>
 				</ul>

@@ -28,21 +28,11 @@
 								 <code><b>ICQ :<?php echo CConfig::get('help.icq_1')?></b></code>
 								</p>
 							</blockquote>
-							<blockquote>
-								<p>
-								   Since 07/22/2014, Opps service officially changed from the <code>Gate Checker</code>.
-								   We apologize for any inconvenience.<br>Sincerely,
-								</p>
-								<small>Opps - 07/22/2014</small>
-							</blockquote>
-							<blockquote>
-								<p>
-								   Since 11/18/2013, BLZONE service officially changed from the domain  <code>www.blzone.ru</code> to <code>www.opps.sx</code>.
-								   Therefore members will automatically access to the new domain while access on the <code>www.opps.sx</code>.<br>
-								   We apologize for any inconvenience.<br>Sincerely,
-								</p>
-								<small>Opps - 11/18/2013</small>
-							</blockquote>
+                            <?php foreach ($records1 as $block1){
+                                ?>
+                                <h6><?php echo $block1['news_title']?></h6>
+                                <p><?php echo $block1['news_content']?></p>
+                            <?php }?>
 						</article>
 						
 					</div>

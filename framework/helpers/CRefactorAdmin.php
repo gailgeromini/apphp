@@ -81,4 +81,26 @@ class CRefactorAdmin extends CModel
 		}else return count($result);
 	
 	}
+    public static function getTotalAccountUnUsed()
+    {
+        $CModel = new CModel();
+        $result = $CModel->db->select("
+            SELECT *
+            FROM accounts WHERE account_used_by=0"
+        );
+        if(empty($result)){
+            return 0;
+        }else return count($result);
+    }
+    public static function getTotalNews()
+    {
+        $CModel = new CModel();
+        $result = $CModel->db->select("
+            SELECT *
+            FROM news"
+        );
+        if(empty($result)){
+            return 0;
+        }else return count($result);
+    }
 }
