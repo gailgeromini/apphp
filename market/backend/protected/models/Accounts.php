@@ -163,4 +163,15 @@ class Accounts extends CModel
         $CModel = new CModel();
         $CModel->db->insert('image_mapping',$data);
     }
+
+    public static function removePWhere(){
+        $session = A::app()->getSession();
+        unset($_SESSION['pacategory']);
+        unset($_SESSION['paountry']);
+        unset($_SESSION['patype']);
+        unset($_SESSION['pause']);
+        unset($_SESSION['pemail']);
+        unset($_SESSION['pbalance']);
+        unset($_SESSION['paextension']);
+    }
 }

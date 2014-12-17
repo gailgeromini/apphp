@@ -48,7 +48,7 @@
             <div class="field">
                 <label for="extension"><small>Extension</small></label>
                 <div class="controls">&nbsp
-                    <input AUTOCOMPLETE="OFF" type="text" value="<?php echo A::app()->getSession()->get('caextension')?>" id="extension" name="extension" class="input" placeholder=" example : jaydevil" >
+                    <input AUTOCOMPLETE="OFF" type="text" value="<?php echo A::app()->getSession()->get('paextension')?>" id="extension" name="extension" class="input" placeholder=" example : jaydevil" >
 
                 </div>
 
@@ -77,7 +77,7 @@
                 <div class="controls">
                     &nbsp&nbsp<input name="action" type="submit" value="Search" class="btn action">
                     <span>or</span>
-                    <input name="action" type="submit" value="Show All Paypals" class="btn" onclick="javascript: if (!confirm('Are you sure you want to show all paypal without any condition?')) { return false; }">
+                    <input name="action" type="submit" value="Show All Accounts" class="btn" onclick="javascript: if (!confirm('Are you sure you want to show all paypal without any condition?')) { return false; }">
                     <input name="action" type="submit" value="Add Type" class="btn action">
                 </div>
             </div>

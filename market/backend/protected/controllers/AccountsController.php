@@ -39,6 +39,9 @@ class AccountsController extends CController
             );
             $model->insert($data);
         }
+        if($cRequest->getPost('action') == 'Show All Accounts'){
+            $model::removePWhere();
+        }
         $this->view->currentPage = isset($page) ? $page : 1;
         $this->view->targetPath = 'accounts/index';
         $this->view->pageSize = 20;
