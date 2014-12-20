@@ -2,6 +2,7 @@
 class Cart extends CModel
 {
 	private static $excluded = '';
+	
 	public function __construct()
 	{
 		parent::__construct();
@@ -201,25 +202,32 @@ class Cart extends CModel
 			return false;
 		}else return true;
 	}
-	private static function processUpdateAccount($account_type,$quantity){
+	private static function accountCheckout($type,$cart_id,$quantity){
 		$CModel = new CModel();
+		$count = 0;
 		for($i=0;$i < $quantity;$i++){
 				$data = array(
 						'account_used_date' => date( 'Y-m-d H:i:s', time() ),
 						'account_used_by'=>CAuth::getLoggedId(),
+                        'cart_id'=>$cart_id,
 				);
-				$aWhere = "account_used_by =0 LIMIT 1";
+                $aWhere = "account_used_by =0 AND account_type =".$type." LIMIT 1";
 				$CModel->db->update('accounts',
 						$data,
 						$aWhere
 				);
-		}
-		
+				$count ++ ;
+		}		
 		if($CModel->db->getErrorMessage()){
+			return false;
+		}
+		if($count != $quantity ){
+			self::processRemoveCart($cart_id); // remove cart id
+			self::$excluded = 1;
 			return false;
 		}else return true;
 	}
-	private static function processUpdateItem($id,$type,$cart_id,$quantity){
+	private static function processUpdateItem($id,$type,$cart_id,$quantity,$cart_session){
 		$CModel = new CModel();
 		switch ($type){
 			case 1: $table = 'cards';
@@ -238,8 +246,8 @@ class Cart extends CModel
 								'paypal_used_by'=>CAuth::getLoggedId(),
 						);
 				break;
-			case 3: 
-					return self::processUpdateAccount($id,$quantity); // return method processUpdateAccount()
+			case 3:
+					return self::accountCheckout($id,$cart_id,$quantity); // return method processUpdateAccount()
 				break;
 		}
 		if(self::ItemExisting($id, $type)){ // check item valid or invalid
@@ -268,7 +276,7 @@ class Cart extends CModel
 	}
 	private static function processCheckOut($ojbArray,$cart_session){
 		
-		if(self::processUpdateItem($ojbArray['cart_item'], $ojbArray['cart_type'],$ojbArray['cart_id'],$ojbArray['cart_quantity'])){
+		if(self::processUpdateItem($ojbArray['cart_item'], $ojbArray['cart_type'],$ojbArray['cart_id'],$ojbArray['cart_quantity'],$cart_session)){
 			self::processUpdateCredit($ojbArray['cart_price']);// update balance user
 			self::processUpdateCart($ojbArray['cart_id'],$cart_session); // update cart 
 		}else return false;

@@ -18,7 +18,9 @@
 						</script>
 					<?php }?>
 					<br/>
-					<ul id="breadcrumbs" class="breadcrumbs" style="margin:0px;"><li class=""><h4>Credit Cards</h4></li></ul>
+					<?php $cards = $this->cards;?>
+					<h4>Credit Cards (<?php echo count($cards);?>)</h4>
+					<br/>
 					<table class="table ">
 						<colgroup>
 							<col class="grid2">
@@ -46,7 +48,7 @@
 						</thead>
 						<tbody>
 					<?php
-					$cards = $this->cards;
+					
 						foreach ($cards as $row)
 							{ $item = Cart::getDetailByCartItemId($row['cart_item'], '1');?>	
 							<tr>
@@ -63,7 +65,9 @@
 						<?php }?>
 						</tbody>
 					</table><br/><br/>
-					<ul id="breadcrumbs" class="breadcrumbs" style="margin:0px;"><li class=""><h4>Paypal Account</h4></li></ul>
+					<?php $paypals = $this->paypals;?>
+					<h4>Paypal Account (<?php echo count($paypals)?>)</h4>
+					<br/>
 					<table class="table ">
 						<colgroup>
 							<col class="grid1">
@@ -93,7 +97,7 @@
 						</thead>
 						<tbody>
 					<?php
-					$paypals = $this->paypals;
+					
 						foreach ($paypals as $row)
 							{ $item = Cart::getDetailByCartItemId($row['cart_item'], '2');?>	
 							<tr>
@@ -112,10 +116,11 @@
 						</tbody>
 					</table>
 					<br/><br/>
-					<ul id="breadcrumbs" class="breadcrumbs" style="margin:0px;"><li class=""><h4>Account Login</h4></li></ul>
+					<?php $accounts = $this->accounts;?>
+					<h4>Account Login (<?php echo count($accounts)?>)</h4>
+					<br/>
 					<table class="table ">
 						<colgroup>
-						<col class="grid1">
 						<col class="grid1">
 		                <col class="grid1">
 		                <col class="grid1">
@@ -127,7 +132,6 @@
 							<tr>
 							<th>TYPE</th>
 							<th>ITEM</th>
-							<th>COUNTRY</th>
 			                <th>ACCOUNT</th>
 			                <th>DATE</th>
 							<th>COST($)</th>
@@ -136,14 +140,13 @@
 						</thead>
 						<tbody>
 					<?php
-					$accounts = $this->accounts;
+					
 					//var_dump($accounts);
 						foreach ($accounts as $row)
 							{ ?>	
 							<tr>
 								<td><?php echo CHtml::image("templates/default/files/images/".$row['image_map_uri'])?></td>
 								<td><?php echo CRefactorUltilities::replSOject('',5,' ********')?></td>
-								<td><?php echo ($row['cart_follow'] != 'all')?CRefactorUltilities::flagsObject(strtolower($row['cart_follow']))." ".$row['cart_follow']:'N/A'?></td>
 								<td><?php echo $row['image_map_name']?> (<?php echo $row['cart_quantity']?>)</td>
 								<td><?php echo $row['cart_date']?></td>
 								<td><?php echo $row['cart_price']?>$</td>

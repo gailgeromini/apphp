@@ -117,8 +117,7 @@ class BuyController extends CController
         if($cRequest->getPost('act') == 'search'){
             $this->view->type = $cRequest->getPost('type');
             $this->view->category = $cRequest->getPost('category');
-            $this->view->country = $cRequest->getPost('country');
-            $session->set('awhere',$model::buildAWhere($this->view->category, $this->view->country, $this->view->type));
+            $session->set('awhere',$model::buildAWhere($this->view->category,$this->view->type));
         }
         elseif($act == 'addcarts'){
         	$items = array();
@@ -145,7 +144,6 @@ class BuyController extends CController
             A::app()->getSession()->get('awhere')
         );
         // assigned gridviews with page range
-        $this->view->cDroplist=$model::cDropList(A::app()->getSession()->get('acountry'));
         $this->view->tDroplist=$model::tDropList(A::app()->getSession()->get('atype'));
         $this->view->ctDroplist=$model::ctDropList(A::app()->getSession()->get('acategory'));
         $this->view->accounts =$model->gridviews;

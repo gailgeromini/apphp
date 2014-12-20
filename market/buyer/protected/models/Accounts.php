@@ -13,29 +13,6 @@ class Accounts extends CModel
 
     }
 
-    public static function cDropList($default= null){
-        $dropdown = '';
-        $CModel = new CModel();
-        $results = $CModel->db->select('
-            SELECT distinct (account_country)
-            FROM accounts
-            WHERE account_used_by = :account_used_by ',
-            array(
-                ':account_used_by' => 0,
-            )
-        );
-        if(count($results) > 0){
-            foreach ($results as $result) {
-                $value=$result['account_country'];
-                $name=$result['account_country'];
-                $attr = ($default != null && $value == $default ? "selected='selected'" : "");
-                $dropdown .= "<option value='".$value."' $attr>".$name."</option>";
-
-            }
-            return "<option value='all'>All Country</option>".$dropdown;
-        }else false;
-    }
-
     public static function tDropList($default= null){
         $dropdown = '';
         $CModel = new CModel();
@@ -58,7 +35,30 @@ class Accounts extends CModel
             return "<option value='0'>All Type</option>".$dropdown;
         }else false;
     }
-
+    
+	public static function countRestrictAnumber($total,$account_type){
+		
+		$CModel = new CModel();
+		$results = $CModel->db->select('
+            SELECT *
+            FROM carts
+            WHERE user_id = :user_id AND cart_type = :cart_type AND cart_item = :cart_item AND is_paid = :is_paid',
+			array(
+						':cart_type' => 3,
+						':user_id' => CAuth::getLoggedId(), 
+						':cart_item' => $account_type,
+						':is_paid' => 0
+			)
+		);
+		if(count($results) >0){
+			$count=0;
+			foreach($results as $rows){
+				$count = $count + $rows['cart_quantity'];
+			}
+			return $total - $count;
+		}else return $total;
+	}
+	
     public static function ctDropList($default= null){
         $dropdown = '';
         $CModel = new CModel();
@@ -124,7 +124,6 @@ class Accounts extends CModel
                             'cart_item'=>$key,
                             'cart_price'=>$this->getPriceByItemId($key,$ojb),
                         	'cart_quantity'=>$ojb,
-                        	'cart_follow'=>A::app()->getSession()->get('acountry'),
                             'cart_type'=>3,
                             'user_id'=>CAuth::getLoggedId(),
                         );
@@ -148,26 +147,19 @@ class Accounts extends CModel
                 'type'=> 'error',
         );
     }
-    public static function buildAWhere($category,$country,$type){
+    public static function buildAWhere($category,$type){
         /*
          * keep search condition
          */
         $session = A::app()->getSession();
         $session->set('fee','');
         $session->set('acategory',CFilter::sanitize('integer',trim($category)));
-        $session->set('acountry',CFilter::sanitize('string',trim($country)));
         $session->set('atype',CFilter::sanitize('integer',trim($type)));
         // ----------------------->
         $CWhere = '';
 
         if(!empty($category) && $category != 0){
             $CWhere .= " AND cate_id ='".CFilter::sanitize('integer',trim($category))."'"; // search by category
-        }
-        if(!empty($country) && $country != 'all'){
-        	
-        	$session->set('fee',CConfig::get('fee')); // Added fee to search
-        	
-            $CWhere .= " AND account_country LIKE '%".CFilter::sanitize('string',trim($country))."%'"; // search like country
         }
         if(!empty($type) && $type != 0){
             $CWhere .= " AND account_type = '".CFilter::sanitize('integer',trim($type))."'"; // search by card type
@@ -178,7 +170,6 @@ class Accounts extends CModel
         $session = A::app()->getSession();
         unset($_SESSION['fee']);
         unset($_SESSION['acategory']);
-        unset($_SESSION['acountry']);
         unset($_SESSION['atype']);
         unset($_SESSION['awhere']);
     }
