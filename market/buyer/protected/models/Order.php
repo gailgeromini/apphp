@@ -22,16 +22,8 @@ class Order extends CModel
 		$this->gridviews=CRefactorPagination::$resultsPagi;
 		$this->pagination=CRefactorPagination::$pagination;
 	}
-	public function buildBulkOrderRefactorPaging($targetPath,$currentPage,$pageSize,$where=null){
-		CRefactorPagination::parsePagi($targetPath,$currentPage,$pageSize,"
-		SELECT * FROM bulks
-		WHERE m_used_by = ".CAuth::getLoggedId()."
-		ORDER BY m_id DESC"
-					);
-					$this->gridviews=CRefactorPagination::$resultsPagi;
-					$this->pagination=CRefactorPagination::$pagination;
-	}
-	public static function getItemByCartId($id,$type){
+
+	public static function getItemByCartId($id,$type,$cart_id){
 		$CModel = new CModel();
 		switch ($type){
 			case 1: $table = 'cards';
@@ -48,6 +40,20 @@ class Order extends CModel
 					$img_id = 'type_id';
 					$info = 'paypal_info';
 				break;
+			case 3:
+				$row = $CModel->db->select("
+	            SELECT *,
+				AES_DECRYPT(account_info,'".CConfig::get('encryptKey')."') AS full_info
+				FROM accounts
+				LEFT JOIN categories ON (accounts.cate_id = categories.category_id) LEFT JOIN image_mapping ON (accounts.account_type = image_mapping.image_map_id)
+							WHERE cart_id = :cart_id AND account_type = :account_type",
+							array(
+									':account_type' => $id,
+									':cart_id'=>$cart_id
+							)
+					);
+				return $row;
+				exit();
 		}
 		$row = $CModel->db->select("
             SELECT *,

@@ -50,7 +50,13 @@
 							$order = $this->newest;
 							foreach ($order as $row)
 							{
-								$items = Order::getItemByCartId($row['cart_item'],$row['cart_type'])
+								$items = Order::getItemByCartId($row['cart_item'],$row['cart_type'],$row['cart_id']);
+								if(is_array($items)){
+									foreach($items as $item){
+										$items['full_info'] .= $item['$item'].",";
+										$items['image_map_uri'] = $item['image_map_uri'];
+									}
+								}
 							?>
 							<tr>
 								<td>
@@ -69,6 +75,8 @@
 									
 								</td>
 								<td>
+								
+								<?php if(isset($items['item_status'])):?>
 								<?php
 								switch($items['item_status']){
 									case 0:
@@ -89,6 +97,9 @@
 										echo "<a href='ticket/view/id/".$items['item_status']."'>".CHtml::image("templates/default/files/images/report.png")."</a>";
 										break;
 								}?>
+								<?php else:?>
+								<?php echo "<input type='checkbox' disabled>" ?>
+								<?php endif;?>
 								</td>
 							</tr>
 						

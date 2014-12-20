@@ -146,6 +146,7 @@ class Paypals extends CModel
 
 		if(!empty($ojbArray)){
 			$CModel = new CModel();
+			$list = '';
 			try {
 				foreach($ojbArray as $ojb){
 					if(!$this->restrictDuplicateCart($ojb)){

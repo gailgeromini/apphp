@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="field">
-                        <label for="extension"><small>Search payment by Username</small></label>
+                        <label for="extension"><small>Extension</small></label>
                         <div class="controls">&nbsp
                             <input AUTOCOMPLETE="OFF" type="text" value="<?php echo A::app()->getSession()->get('payextension')?>" id="extension" name="extension" class="input" placeholder=" example : jaydevil" >
                         </div>
