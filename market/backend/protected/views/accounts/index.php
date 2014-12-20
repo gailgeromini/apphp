@@ -53,32 +53,12 @@
                 </div>
 
             </div>
-            <div class="field">
-                <label for="extension"><small>Extension</small></label>
-                <div>
-                    <div class="controls pcontrols">
-                        <ul>
-                            <li><label for="Email">
-                                    <input type="checkbox" <?php if(A::app()->getSession()->get('pemail')){
-                                        echo 'checked=""';
-                                    }?>
-                                           id="box_checked" name="pemail">Email Login</label></li>
-                            <li><label for="Balance"><input type="checkbox" <?php if(A::app()->getSession()->get('pbalance')){
-                                        echo 'checked=""';
-                                    }?>id="box_checked" name="pbalance">With Balance</label></li>
-                        </ul>
-                    </div>
-                    <input type="text" placeholder="Input Type" name="txtType">
-                    <input type="text" placeholder="url like :/type/aol.png" name="txtImage">
-                </div>
-            </div>
 
             <div class="actions">
                 <div class="controls">
                     &nbsp&nbsp<input name="action" type="submit" value="Search" class="btn action">
                     <span>or</span>
                     <input name="action" type="submit" value="Show All Accounts" class="btn" onclick="javascript: if (!confirm('Are you sure you want to show all paypal without any condition?')) { return false; }">
-                    <input name="action" type="submit" value="Add Type" class="btn action">
                 </div>
             </div>
         </fieldset>

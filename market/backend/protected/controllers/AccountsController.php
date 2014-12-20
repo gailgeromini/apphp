@@ -31,14 +31,6 @@ class AccountsController extends CController
             $this->view->pbalance= isset($_REQUEST['pbalance']) ? $cRequest->getPost('pbalance') : "";
             $session->set('pawhere',$model::buildCAWhere($this->view->category, $this->view->country, $this->view->type ,$this->view->used, $this->view->extension,$this->view->pemail,$this->view->pbalance));
         }
-        if($cRequest->getPost('action') == 'Add Type'){
-            $data = array(
-                "image_map_name"   => $cRequest->getPost('txtType'),
-                "image_map_uri"  => $cRequest->getPost('txtImage'),
-                "item_type_id" => 3
-            );
-            $model->insert($data);
-        }
         if($cRequest->getPost('action') == 'Show All Accounts'){
             $model::removePWhere();
         }

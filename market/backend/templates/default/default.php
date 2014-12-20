@@ -63,10 +63,20 @@
 				<ul id="menu">
 					<li class="<?php echo (($activeLink == 'index') ? ' active' : ''); ?>" ><a href="index">Home</a></li>
 					<li class="<?php echo (($activeLink == 'users') ? ' active' : ''); ?>" ><a href="users">Users<small><?php echo CRefactorAdmin::getTotalUserActive()?></small></a></li>
-					<li class="<?php echo (($activeLink == 'cards') ? ' active' : ''); ?>" ><a href="cards">Credits Card<small><?php echo CRefactorAdmin::getTotalCardUnUsed()?></small></a></li>
-					<li class="<?php echo (($activeLink == 'paypals') ? ' active' : ''); ?>" ><a href="paypals">Paypals<small><?php echo CRefactorAdmin::getTotalPaypalUnUsed()?></small></a></li>
-                    <li class="<?php echo (($activeLink == 'accounts') ? ' active' : ''); ?>" ><a href="accounts">Accounts<small><?php echo CRefactorAdmin::getTotalAccountUnUsed()?></small></a></li>
-                    <li class="<?php echo (($activeLink == 'news') ? ' active' : ''); ?>" ><a href="news">News<small><?php echo CRefactorAdmin::getTotalNews()?></small></a></li>
+					<li class="dropdown <?php echo (($activeLink == 'cards' || $activeLink == 'paypals' || $activeLink == 'accounts') ? ' active' : ''); ?>" >
+					<a href="#">Item's Manager <span class="caret"></span></a>
+					<ul class="menu">
+						<li><a href="cards">Credits Card (<?php echo CRefactorAdmin::getTotalCardUnUsed()?>)</a></li>
+						<li><a href="paypals">Paypals (<?php echo CRefactorAdmin::getTotalPaypalUnUsed()?>)</a></li>
+	                    <li><a href="accounts">Accounts (<?php echo CRefactorAdmin::getTotalAccountUnUsed()?>)</a></li>
+					</ul></li>
+					<li class="dropdown <?php echo (($activeLink == 'importing') ? ' active' : ''); ?>" >
+					<a href="#">Item's Importing <span class="caret"></span></a>
+					<ul class="menu">
+						<li><a href="importing/cards">Credits Card</a></li>
+						<li><a href="importing/paypals">Paypals</a></li>
+	                    <li><a href="importing/accounts">Accounts</a></li>
+					</ul></li>
                     <li class="<?php echo (($activeLink == 'deposit') ? ' active' : ''); ?>" ><a href="deposit">Deposit <small><?php echo CRefactorAdmin::getTotalPayment()?></small></a></li>
 					<li class="<?php echo (($activeLink == 'ticket') ? ' active' : ''); ?>" ><a href="ticket">Tickets <small><?php echo CRefactorAdmin::getTotalAdminTicket()?></small></a></li>
 				</ul>
