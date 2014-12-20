@@ -12,15 +12,34 @@ class Ticket extends CModel
 		parent::__construct();
 	
 	}
-	
+
+    public static function cDropList($default= null){
+        $dropdown = '';
+        $CModel = new CModel();
+        $results = $CModel->db->select('
+            SELECT item_type_id,item_type_name
+            FROM item_types'
+        );
+        if(count($results) > 0){
+            foreach ($results as $result) {
+                $value=$result['item_type_id'];
+                $name=$result['item_type_name'];
+                $attr = ($default != null && $value == $default ? "selected='selected'" : "");
+                $dropdown .= "<option value='".$value."' $attr>".$name."</option>";
+            }
+            return "<option value='0'>All Type</option>".$dropdown;
+        }else false;
+    }
+
 	public function buildTicketRefactorPaging($targetPath,$currentPage,$pageSize,$where=null){
-		CRefactorPagination::parsePagi($targetPath,$currentPage,$pageSize,"
+		CRefactorPagination::parsePagi($targetPath,$currentPage,$pageSize,'
 		SELECT * FROM ticket
 		LEFT JOIN users ON
 		ticket.user_id = users.user_id
 		LEFT JOIN ticket_status ON
 		ticket.ticket_status_id = ticket_status.ticket_status_id
-		ORDER BY ticket_id DESC"
+		WHERE ticket.ticket_id > 0 '.$where.'
+		ORDER BY ticket_id DESC'
 		);
 		$this->gridviews=CRefactorPagination::$resultsPagi;
 		$this->pagination=CRefactorPagination::$pagination;
@@ -137,4 +156,33 @@ class Ticket extends CModel
 		return $row[0];
 	}
 
+    public static function buildPAYWhere($type,$extension){
+        /*
+         * keep search condition
+         */
+        $session = A::app()->getSession();
+        $session->set('tickettype',CFilter::sanitize('integer',trim($type)));
+        $session->set('ticketyextension',trim($extension));
+        // ----------------------->
+        $CWhere = '';
+
+        if(!empty($type)){
+            $CWhere .= " AND ticket_item_type = '".CFilter::sanitize('integer',trim($type))."'"; // search by payment type
+        }
+
+        if(!empty($extension) && $extension != ''){
+
+            $extension = explode(",",$extension);
+
+            if(isset($extension[0])){
+                $CWhere .= " AND users.user_name LIKE '".trim($extension[0])."%'"; // search by user
+            }
+        }
+        return trim($CWhere);
+    }
+    public static function removePWhere(){
+        $session = A::app()->getSession();
+        unset($_SESSION['tickettype']);
+        unset($_SESSION['ticketyextension']);
+    }
 }

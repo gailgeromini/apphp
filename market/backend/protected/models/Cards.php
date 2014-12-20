@@ -174,7 +174,6 @@ class Cards extends CModel
 			if(isset($extension[3])){
 				$CWhere .= " AND card_city LIKE '".trim($extension[3])."%'"; // search city 
 			}
-			
 		}
 		return trim($CWhere);
 	}

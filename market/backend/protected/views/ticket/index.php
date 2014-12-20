@@ -1,5 +1,49 @@
 <div class="grid12">
 		<article class="panel">
+            <?php if(!empty($Messages)){?>
+                <div class="msg <?php echo $Mtype?>">
+                    <p><?php echo $Messages; ?></p>
+                    <a class="close">&times;</a>
+                </div>
+            <?php }?>
+            <form action="<?php echo $targetPath;?>" method="POST">
+                <fieldset class="form">
+                    <?php
+                    // draw search form
+                    echo CWidget::form(array(
+
+                        'fields'=>array(
+
+                            'act'     =>array('type'=>'hidden', 'value'=>'search'),
+                        ),
+                        'return'=>true,
+                    ));
+                    ?>
+
+                    <div class="field">
+                        <label for="cardsType"><small>Options</small></label>
+                        <div class="controls cards">
+                            <select id="select" name="type">
+                                <?php echo $cDroplist;?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="extension"><small>Search payment by Username</small></label>
+                        <div class="controls">&nbsp
+                            <input AUTOCOMPLETE="OFF" type="text" value="<?php echo A::app()->getSession()->get('ticketyextension')?>" id="extension" name="extension" class="input" placeholder=" example : jaydevil" >
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <div class="controls">
+                            &nbsp&nbsp<input name="action" type="submit" value="Search" class="btn action">
+                            <span>or</span>
+                            <input name="action" type="submit" value="Show All Types" class="btn" onclick="javascript: if (!confirm('Are you sure you want to show all paypal without any condition?')) { return false; }">
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
 				<header>
 						<h3>Ticket</h3>
 						<br/>

@@ -14,8 +14,19 @@ class TicketController extends CController
 	
 	public function indexAction($page=null)
 	{
-	
+
+        $cRequest = A::app()->getRequest();
+        $session = A::app()->getSession();
         $model = new Ticket();
+        $act =  isset($_REQUEST['act']) ? trim($_REQUEST['act']) : "";
+        if($cRequest->getPost('act') == 'search'){
+            $this->view->type = $cRequest->getPost('type');
+            $this->view->extension = $cRequest->getPost('extension');
+            $session->set('ticketwhere',$model::buildPAYWhere($this->view->type,$this->view->extension));
+        }
+        if($cRequest->getPost('action') == 'Show All Types'){
+            $model::removePWhere();
+        }
 		$this->view->currentPage = isset($page) ? $page : 1;
 		$this->view->targetPath = 'ticket/index';
 		$this->view->pageSize = 20;
@@ -23,12 +34,14 @@ class TicketController extends CController
 				$this->view->targetPath, 	//  set targetPath
 				$this->view->currentPage, // set currentPage
 				$this->view->pageSize, // set pageSize
-				''
-		);
+            A::app()->getSession()->get('ticketwhere')
+
+        );
 		$this->view->ticket =$model->gridviews;
 		// assigned pagination html
 		$this->view->pagination=$model->pagination;
-		$this->view->render('ticket/index');
+        $this->view->cDroplist=$model::cDropList(A::app()->getSession()->get('tickettype'));
+        $this->view->render('ticket/index');
   
 	}
 	public function viewAction($id=null){
