@@ -21,8 +21,9 @@ class TicketController extends CController
         $act =  isset($_REQUEST['act']) ? trim($_REQUEST['act']) : "";
         if($cRequest->getPost('act') == 'search'){
             $this->view->type = $cRequest->getPost('type');
+            $this->view->status = $cRequest->getPost('status');
             $this->view->extension = $cRequest->getPost('extension');
-            $session->set('ticketwhere',$model::buildPAYWhere($this->view->type,$this->view->extension));
+            $session->set('ticketwhere',$model::buildPAYWhere($this->view->type,$this->view->status,$this->view->extension));
         }
         if($cRequest->getPost('action') == 'Show All Types'){
             $model::removePWhere();
@@ -41,6 +42,7 @@ class TicketController extends CController
 		// assigned pagination html
 		$this->view->pagination=$model->pagination;
         $this->view->cDroplist=$model::cDropList(A::app()->getSession()->get('tickettype'));
+        $this->view->sDropList=$model::sDropList(A::app()->getSession()->get('ticketstatus'));
         $this->view->render('ticket/index');
   
 	}

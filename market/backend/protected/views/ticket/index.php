@@ -29,6 +29,14 @@
                         </div>
                     </div>
                     <div class="field">
+                        <label for="cardsType"><small>Options</small></label>
+                        <div class="controls cards">
+                            <select id="select" name="status">
+                                <?php echo $sDropList;?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
                         <label for="extension"><small>Search payment by Username</small></label>
                         <div class="controls">&nbsp
                             <input AUTOCOMPLETE="OFF" type="text" value="<?php echo A::app()->getSession()->get('ticketyextension')?>" id="extension" name="extension" class="input" placeholder=" example : jaydevil" >

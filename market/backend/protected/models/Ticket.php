@@ -18,7 +18,8 @@ class Ticket extends CModel
         $CModel = new CModel();
         $results = $CModel->db->select('
             SELECT item_type_id,item_type_name
-            FROM item_types'
+            FROM item_types
+            limit 2'
         );
         if(count($results) > 0){
             foreach ($results as $result) {
@@ -28,6 +29,24 @@ class Ticket extends CModel
                 $dropdown .= "<option value='".$value."' $attr>".$name."</option>";
             }
             return "<option value='0'>All Type</option>".$dropdown;
+        }else false;
+    }
+
+    public static function sDropList($default= null){
+        $dropdown = '';
+        $CModel = new CModel();
+        $results = $CModel->db->select('
+            SELECT ticket_status_id,ticket_status_name
+            FROM ticket_status'
+        );
+        if(count($results) > 0){
+            foreach ($results as $result) {
+                $value=$result['ticket_status_id'];
+                $name=$result['ticket_status_name'];
+                $attr = ($default != null && $value == $default ? "selected='selected'" : "");
+                $dropdown .= "<option value='".$value."' $attr>".$name."</option>";
+            }
+            return "<option value='0'>All Status</option>".$dropdown;
         }else false;
     }
 
@@ -156,18 +175,23 @@ class Ticket extends CModel
 		return $row[0];
 	}
 
-    public static function buildPAYWhere($type,$extension){
+    public static function buildPAYWhere($type,$status,$extension){
         /*
          * keep search condition
          */
         $session = A::app()->getSession();
         $session->set('tickettype',CFilter::sanitize('integer',trim($type)));
+        $session->set('ticketstatus',CFilter::sanitize('integer',trim($status)));
         $session->set('ticketyextension',trim($extension));
         // ----------------------->
         $CWhere = '';
 
         if(!empty($type)){
             $CWhere .= " AND ticket_item_type = '".CFilter::sanitize('integer',trim($type))."'"; // search by payment type
+        }
+
+        if(!empty($status)){
+            $CWhere .= " AND ticket.ticket_status_id = '".CFilter::sanitize('integer',trim($status))."'"; // search by payment type
         }
 
         if(!empty($extension) && $extension != ''){
