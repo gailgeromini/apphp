@@ -47,7 +47,7 @@
                         <div class="controls">
                             &nbsp&nbsp<input name="action" type="submit" value="Search" class="btn action">
                             <span>or</span>
-                            <input name="action" type="submit" value="Show All Types" class="btn" onclick="javascript: if (!confirm('Are you sure you want to show all paypal without any condition?')) { return false; }">
+                            <input name="action" type="submit" value="View All" class="btn" onclick="javascript: if (!confirm('Are you sure you want to show all ticket without any condition?')) { return false; }">
                         </div>
                     </div>
                 </fieldset>

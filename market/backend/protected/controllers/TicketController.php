@@ -25,7 +25,7 @@ class TicketController extends CController
             $this->view->extension = $cRequest->getPost('extension');
             $session->set('ticketwhere',$model::buildPAYWhere($this->view->type,$this->view->status,$this->view->extension));
         }
-        if($cRequest->getPost('action') == 'Show All Types'){
+        if($cRequest->getPost('action') == 'View All'){
             $model::removePWhere();
         }
 		$this->view->currentPage = isset($page) ? $page : 1;

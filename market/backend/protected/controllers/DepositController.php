@@ -19,13 +19,14 @@ class DepositController extends CController
         $session = A::app()->getSession();
         $model = new Deposit();
         $act =  isset($_REQUEST['act']) ? trim($_REQUEST['act']) : "";
+      
         if($cRequest->getPost('act') == 'search'){
             $this->view->type = $cRequest->getPost('type');
             $this->view->extension = $cRequest->getPost('extension');
             $session->set('paywhere',$model::buildPAYWhere($this->view->type,$this->view->extension));
         }
-        if($cRequest->getPost('action') == 'Show All Payments'){
-            $model::removePWhere();
+        if($cRequest->getPost('action') == 'View All'){
+        	$model::removePWhere();
         }
 		$this->view->currentPage = isset($page) ? $page : 1;
  		$this->view->modelUri = 'deposit/index';

@@ -79,5 +79,6 @@ class Deposit extends CModel
         $session = A::app()->getSession();
         unset($_SESSION['paytype']);
         unset($_SESSION['payextension']);
+        unset($_SESSION['paywhere']);
     }
 }

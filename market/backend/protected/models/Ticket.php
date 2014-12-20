@@ -208,5 +208,6 @@ class Ticket extends CModel
         $session = A::app()->getSession();
         unset($_SESSION['tickettype']);
         unset($_SESSION['ticketyextension']);
+        unset($_SESSION['ticketwhere']);
     }
 }
