@@ -22,8 +22,8 @@ class Order extends CModel
 		$this->gridviews=CRefactorPagination::$resultsPagi;
 		$this->pagination=CRefactorPagination::$pagination;
 	}
-
-	public static function getItemByCartId($id,$type,$cart_id){
+	
+	public static function getItemByCartId($id,$type,$cart_id=''){
 		$CModel = new CModel();
 		switch ($type){
 			case 1: $table = 'cards';

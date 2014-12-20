@@ -85,6 +85,27 @@ class OrderController extends CController
 		$this->view->render('order/paypals');
 	
 	}
+	
+	public function accountsAction($page=null)
+	{
+		$model = new Order();
+		$this->view->currentPage = isset($page) ? $page : 1;
+		$this->view->targetPath = 'order/accounts';
+		$this->view->pageSize = 10;
+		$model->buildCartsOrderRefactorPaging(
+				$this->view->targetPath, 	//  set targetPath
+				$this->view->currentPage, // set currentPage
+				$this->view->pageSize, // set pageSize
+				'',
+				3
+		);
+		$this->view->accounts =$model->gridviews;
+		// assigned pagination html
+		$this->view->pagination=$model->pagination;
+		$this->view->render('order/accounts');
+	
+	}
+	
 	private static function actionPageOrder($act,$list){
 		$model = new Order();
 		if($act == 'Cronjob Check'){
