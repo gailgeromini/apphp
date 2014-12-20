@@ -202,30 +202,45 @@ class Cart extends CModel
 			return false;
 		}else return true;
 	}
-	private static function accountCheckout($type,$cart_id,$quantity){
+	private static function validationAccountCheckout($type,$quantity){
 		$CModel = new CModel();
-		$count = 0;
-		for($i=0;$i < $quantity;$i++){
-				$data = array(
-						'account_used_date' => date( 'Y-m-d H:i:s', time() ),
-						'account_used_by'=>CAuth::getLoggedId(),
-                        'cart_id'=>$cart_id,
-				);
-                $aWhere = "account_used_by =0 AND account_type =".$type." LIMIT 1";
-				$CModel->db->update('accounts',
-						$data,
-						$aWhere
-				);
-				$count ++ ;
-		}		
-		if($CModel->db->getErrorMessage()){
-			return false;
-		}
-		if($count != $quantity ){
+		$rows = $CModel->db->select("
+			SELECT * FROM accounts
+			WHERE account_used_by = :account_used_by AND account_type = :account_type",
+		   		array(
+		   				':account_used_by' => 0,
+		   				':account_type' => $type,
+		   		)
+		);
+		if(count($rows) >= $quantity){
+			return true;
+		}else return false;
+	}
+	private static function accountCheckout($type,$cart_id,$quantity){
+		if(self::validationAccountCheckout($type,$quantity)){
+			$CModel = new CModel();
+			$count = 0;
+			for($i=0;$i < $quantity;$i++){
+					$data = array(
+							'account_used_date' => date( 'Y-m-d H:i:s', time() ),
+							'account_used_by'=>CAuth::getLoggedId(),
+	                        'cart_id'=>$cart_id,
+					);
+	                $aWhere = "account_used_by =0 AND account_type =".$type." LIMIT 1";
+					$CModel->db->update('accounts',
+							$data,
+							$aWhere
+					);
+			}		
+			if($CModel->db->getErrorMessage()){
+				return false;
+			}
+		}else{
 			self::processRemoveCart($cart_id); // remove cart id
 			self::$excluded = 1;
 			return false;
-		}else return true;
+		}
+		
 	}
 	private static function processUpdateItem($id,$type,$cart_id,$quantity,$cart_session){
 		$CModel = new CModel();
