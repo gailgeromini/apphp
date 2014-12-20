@@ -132,7 +132,7 @@ class Accounts extends CModel
                 $list = '';
                 foreach($ojbArray as $key => $ojb){
                 		if($ojb > $this->accountNumber($key)){
-                			throw new Exception("Please select value that is no more than ".$this->accountNumber($key)." !");
+                			throw new Exception("Quantity are excluded from my items (can be used for other people). Enter value no more than ".$this->accountNumber($key)." please !");
                 		}
                         $data= array(
                             'cart_item'=>$key,
