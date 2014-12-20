@@ -2,7 +2,7 @@
 class Cart extends CModel
 {
 	private static $excluded = '';
-	
+
 	public function __construct()
 	{
 		parent::__construct();

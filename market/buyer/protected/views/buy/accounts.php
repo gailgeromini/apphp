@@ -93,7 +93,7 @@
                         if(A::app()->getSession()->get('fee') != ''){
                             echo "<span style='font-size:8.5px;color:#E02323;'> ( +".A::app()->getSession()->get('fee')." $ )</span>";
                         }else echo "No Fee"?></td>
-                    <td><input type="number" min="0" id="items" name="items_<?php echo $row['image_map_id']?>" value="0" style="width: 50px; font-size: 11px; padding: 6px;"></td>
+                    <td><input type="number" min="0" max="<?php echo Accounts::countRestrictAnumber($row['numbers'], $row['account_type']);?>" id="items" name="items_<?php echo $row['image_map_id']?>" value="0" style="width: 50px; font-size: 11px; padding: 6px;"></td>
                 </tr>
 				<?php endif;?>
             <?php }?>

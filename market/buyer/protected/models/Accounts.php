@@ -112,7 +112,18 @@ class Accounts extends CModel
         );
         return (($row[0]['account_price'] + A::app()->getSession()->get('fee')) - (($row[0]['account_price'] * $row[0]['discount']) / 100)) * $num;
     }
-
+    
+	private function accountNumber($type){
+		$CModel = new CModel();
+		$row = $CModel->db->select('
+            SELECT * FROM accounts
+			WHERE account_type = :account_type AND account_used_by = 0',
+				array(
+						':account_type' => $type,
+				)
+		);
+		return count($row);
+	}
     public function addToCarts($ojbArray){
 		
         if(!empty($ojbArray)){
@@ -120,6 +131,9 @@ class Accounts extends CModel
             try {
                 $list = '';
                 foreach($ojbArray as $key => $ojb){
+                		if($ojb > $this->accountNumber($key)){
+                			throw new Exception("Please select value that is no more than ".$this->accountNumber($key)." !");
+                		}
                         $data= array(
                             'cart_item'=>$key,
                             'cart_price'=>$this->getPriceByItemId($key,$ojb),
