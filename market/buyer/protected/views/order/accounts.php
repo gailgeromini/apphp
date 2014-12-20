@@ -49,7 +49,7 @@
 								$items = Order::getItemByCartId($row['cart_item'],$row['cart_type'],$row['cart_id']);
 								if(is_array($items)){
 									foreach($items as $item){
-										$items['full_info'] .= $item['$item'].",";
+										$items['full_info'] .= $item['full_info'].",";
 										$items['image_map_uri'] = $item['image_map_uri'];
 									}
 								}

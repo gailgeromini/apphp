@@ -234,7 +234,7 @@ class Cart extends CModel
 			}		
 			if($CModel->db->getErrorMessage()){
 				return false;
-			}
+			}else return true;
 		}else{
 			self::processRemoveCart($cart_id); // remove cart id
 			self::$excluded = 1;
