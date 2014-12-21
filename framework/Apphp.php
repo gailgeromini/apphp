@@ -272,7 +272,7 @@ class A
 	}
 	public static function copyright()
 	{
-		return self::t('core', '&copy;'.date('Y').' ').'<a href="terms" rel="external">wWw.Opps.Sx</a>';
+		return self::t('core', '&copy;'.date('Y').' ').'<a href="terms" rel="external">wWw.Acug.Ru</a>';
 	}
 	/**
 	 * Translates a message to the specified language

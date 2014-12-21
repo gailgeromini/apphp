@@ -59,7 +59,7 @@
 				</ul>
 			</div>
 		<div id="panel">
-				<h1 class="icon logo">OPPS! ADMIN<small>Our quality commitment, Freshness Guarantee</small></h1>
+				<h1 class="icon logo">ADMIN<small>Version beta 0.2</small></h1>
 				<ul id="menu">
 					<li class="<?php echo (($activeLink == 'index') ? ' active' : ''); ?>" ><a href="index">Home</a></li>
 					<li class="<?php echo (($activeLink == 'users') ? ' active' : ''); ?>" ><a href="users">Users<small><?php echo CRefactorAdmin::getTotalUserActive()?></small></a></li>
@@ -91,7 +91,7 @@
 		</div>
 		</div>
 		<footer>
-     	   <p><?php echo A::copyright();?>, All rights reserved.</p>
+     	   <p><?php echo A::copyright();?> All rights reserved.</p>
 		</footer>
 	
 	</body>

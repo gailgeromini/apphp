@@ -1,6 +1,5 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+
 class BuyController extends CController
 {
 
@@ -15,7 +14,7 @@ class BuyController extends CController
        CRefactorProfile::handleBannedMember(CAuth::getLoggedId());
        // restricted access to this controller for undeposited users
        CRefactorProfile::handleUndepositedMember(CAuth::getLoggedId());
-       $this->view->setMetaTags('title', 'Opps Buying');
+       $this->view->setMetaTags('title', 'Buying');
        $this->view->activeLink = 'buy' ;
     }
 	

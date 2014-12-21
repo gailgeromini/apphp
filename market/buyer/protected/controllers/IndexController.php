@@ -13,7 +13,7 @@ class IndexController extends CController
         // block access to this controller for banned users
         CRefactorProfile::handleBannedMember(CAuth::getLoggedId());
                
-        $this->view->setMetaTags('title', 'Welcome Opps Market');
+        $this->view->setMetaTags('title', 'Welcome ACUG');
         $this->view->activeLink= 'index' ;
 		
       		

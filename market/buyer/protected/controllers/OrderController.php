@@ -13,7 +13,7 @@ class OrderController extends CController
         CRefactorProfile::handleBannedMember(CAuth::getLoggedId());
         // restricted access to this controller for undeposited users
         CRefactorProfile::handleUndepositedMember(CAuth::getLoggedId());
-        $this->view->setMetaTags('title', 'Opps Orders');
+        $this->view->setMetaTags('title', 'Orders');
         $this->view->activeLink= 'order' ;
     }
 	

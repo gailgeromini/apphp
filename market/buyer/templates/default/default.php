@@ -68,7 +68,7 @@
 				</ul>
 			</div>
 		<div id="panel">
-				<h1 class="icon logo">Private Bulk<small>Our quality commitment, freshness guarantee</small></h1>
+				<h1 class="icon logo">ACUG<small>Our quality commitment, freshness guarantee</small></h1>
 				<ul id="menu">
 					<li class="<?php echo (($activeLink == 'index') ? ' active' : ''); ?>" ><a href="index">Home</a></li>
 					<li class="<?php echo (($activeLink == 'buy') ? ' active' : ''); ?>" ><a href="buy">Buy Items</a></li>
@@ -122,7 +122,7 @@
 		<?php }?>
 		</div>
 		<footer>
-     	   <p><?php echo A::copyright();?>, All rights reserved.</p>
+     	   <p><?php echo A::copyright();?> All rights reserved.</p>
 		</footer>
 	
 	</body>

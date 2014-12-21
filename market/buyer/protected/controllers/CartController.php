@@ -13,7 +13,7 @@ class CartController extends CController
         CRefactorProfile::handleBannedMember(CAuth::getLoggedId());
         // restricted access to this controller for undeposited users
         CRefactorProfile::handleUndepositedMember(CAuth::getLoggedId());
-        $this->view->setMetaTags('title', 'Opps Cart');
+        $this->view->setMetaTags('title', 'Cart');
         $this->view->activeLink= '' ;
     }
 	
