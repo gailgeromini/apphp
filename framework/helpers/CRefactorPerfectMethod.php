@@ -10,11 +10,15 @@ class CRefactorPerfectMethod
 	static $Payee_Id;
 	static $PassPhrase;
 	static $Payee_Account;
+	static $Batch_Email;
+	static $Batch_Password;
 	
 	function __construct($Payee_Id, $PassPhrase ,$Payee_Account){
 		$this->Payee_Id = $Payee_Id;
 		$this->PassPhrase = $PassPhrase;
 		$this->Payee_Account = $Payee_Account;
+		$this->Batch_Email = 'inull062';
+		$this->Batch_Password = 'KRj7QLSt1qcj8tO';
 	}
 	
 	private static function getBetween($string, $start, $end){
@@ -30,8 +34,8 @@ class CRefactorPerfectMethod
 	
 		/* connect to gmail */
 		$hostname = '{imap.gmail.com:993/imap/ssl}INBOX';
-		$username = '';
-		$password = '';
+		$username = $this->Batch_Email;
+		$password = $this->Batch_Password;
 	
 		/* try to connect */
 		$inbox = imap_open($hostname,$username,$password) or die('Cannot connect to Gmail: ' . imap_last_error());

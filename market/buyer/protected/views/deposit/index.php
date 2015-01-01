@@ -20,7 +20,11 @@
 			<div class="field">
 				<div class="controls pcontrols">
 					<ul>
+						<?php if(CRefactorProfile::handleNewestMember(CAuth::getLoggedId())):?>
+						<li><label for="perfect"><input type="radio" name="radio" checked onchange="deposit();">Perfect Money</label></li>
+						<?php else:?>
 						<li><label for="perfect"><input type="radio" name="radio" checked onchange="deposit();">Perfect Money (e-Voucher) &nbsp</label></li>
+						<?php endif;?>
 						<li><label for="bitcoin"><input type="radio" name="radio"  onchange="deposit();">BTC (Bitcoin-USD) &nbsp</label></li>
 					</ul>
 				</div>
@@ -52,6 +56,41 @@
 			</div>
 			</form>
 			</div>
+			<?php if(CRefactorProfile::handleNewestMember(CAuth::getLoggedId())):?>
+			<div id="deposit_perfectmoney">
+			<p>We only accept USD from Perfect Money site: https://perfectmoney.is<br/>
+			You Can Send the money you want					
+			to our account <code><?php echo CConfig::get('pm_method.perfect_account')?></code> follow step by step .Then click on Top Up it will be added Automatic<br/>
+			<code>MINIMUM PAYMENT: $<?php echo CConfig::get('pm_method.perfect_min_pay')?></code><br/>
+			I already sent money to  <code><?php echo CConfig::get('pm_method.perfect_account')?></code> (min $<?php echo CConfig::get('pm_method.perfect_min_pay')?> / max $1,000.00).</p>
+			<form onsubmit="return returnfrPerfect()" name="frPerfect" method="POST" action="" method="POST" >
+			
+			<div class="field" id="field_p7">
+						<?php
+				    // draw search form
+				       echo CWidget::form(array(
+				        	
+				            'fields'=>array(
+
+				                'act'     =>array('type'=>'hidden', 'value'=>'deposit'),
+				            ),
+				            'return'=>true,
+				        ));    
+				    ?>
+				<div class="controls pcontrols">
+					<input type="text" class="input" placeholder="Enter your batch number ?" name="BATCH_NUMBER"  AUTOCOMPLETE="OFF" onblur="reqForm.validCompare(this.id,this.value,this.name,'#field_p7','#field_deposit_2','Batch number can not be blank','Enter batch number > 5 character',5)">
+				   <p id="field_deposit_2"></p>
+				</div>&nbsp
+				<div class="controls pcontrols">
+				<input type="submit" value="Topup" class="btn action">
+				</div>
+				</div>
+			</form>
+			
+			<p>
+	
+			</div>
+			<?php else:?>
 			<div id="deposit_perfectmoney">
 			<p>We only accept USD withdraw code from Perfect Money site: https://perfectmoney.is/withdrawal.html <br/>
 			You Can Send the money you want					
@@ -109,6 +148,7 @@
 				Step 5: Back to shop and Submit info e-Voucher to complete your order<br/>
 			</p>
 			</div>
+			<?php endif;?>
 		</fieldset>
 		</article>
 	</div>

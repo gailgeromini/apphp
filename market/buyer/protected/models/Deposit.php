@@ -88,6 +88,54 @@ class Deposit extends CModel
 		  );
 		
 	 }
+	 
+	 public function depositBatchMethod($batchNumber){
+	 	$batch_number = CFilter::sanitize('alphanumeric', $batchNumber);
+	 	if($this->paymentDuplicateCheck(strtoupper(hash('sha256', $batch_number)))){
+	 		$CRefactorPerfectMethod = new CRefactorPerfectMethod('','','');
+	 		$data = json_decode($CRefactorPerfectMethod->perfectUsage($batch_number));
+	 		if(isset($data['error'])){ // error return
+	 			CRefactorWriteLogs::WriteLogs("There is a problem with batch number : #".$batch_number."",CAuth::getLoggedId(),1); //
+	 			return array (
+	 					'message' => "There is a problem parsing batch number : <code>#".$batch_number."</code>",
+	 					'type'=> 'alert',
+	 			);
+	 		}elseif(isset($data['ev_amount'])){ // bacth found
+	 			if($data['pm_amount'] >= CConfig::get('pm_method.perfect_min_pay')){
+	 				$payment = array(
+	 						'user_id' => CAuth::getLoggedId(),
+	 						'payment_amount' => $data['pm_amount'],
+	 						'payment_batch' => $batch_number,
+	 						'payment_token' => strtoupper(hash('sha256', $batch_number)),
+	 						'payment_account' => 'Perfect Money',
+	 						'payment_updated' => CRefactorProfile::getBalance(CAuth::getLoggedId()) + $data['ev_amount'],
+	 						'payment_method_id' => 1,
+	 				);
+	 				$this->updateCredits($data['ev_amount']);
+	 				$this->logsPayment($payment);
+	 				CRefactorWriteLogs::WriteLogs('Once Deposit has been successful : '.$data['pm_amount'].'$',CAuth::getLoggedId(),1); // write logs login
+	 				return array (
+	 						'message' => "Once Deposit has been successful : <code>". $data['pm_amount']."$</code>",
+	 						'type'=> 'success',
+	 				);
+	 			}else{
+	 				CRefactorWriteLogs::WriteLogs('Minimum payment could not process : '.$data['pm_amount'].'$',CAuth::getLoggedId(),1); // write logs login
+	 				return array (
+	 						'message' => "We could not process the hash batch request , Minimum payment is : <code>".CConfig::get('pm_method.perfect_min_pay')."$</code>",
+	 						'type'=> 'error',
+	 				);
+	 			}
+	 		}else return array (
+	 				'message' => "We could not process the hash batch request : <code>#".$batch_number."</code>",
+	 				'type'=> 'error',
+	 		);
+	 
+	 	}else return array (
+	 			'message' => "Duplicate batch number : <code>#".$batch_number."</code>",
+	 			'type'=> 'notice',
+	 	);
+	 
+	 }
 	 public function depositBitcoinMethod($address){
 	 	$btc_address = CFilter::sanitize('string', $address);
 	 	if($this->paymentDuplicateCheck(strtoupper(hash('sha256', $btc_address)))){

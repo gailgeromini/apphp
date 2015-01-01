@@ -17,30 +17,41 @@ function returnfrWebmoney()
 	{
 
 	}
-function returnfrPerfect()
-	{
+function returnfrPerfect(){
 
 		var returnvlue = 'no'
-			
-		if(document.frPerfect.EV_NUMBER.value.match( /^[A-Za-z][\w]*$/))
-		{
-			document.frPerfect.EV_NUMBER.focus();
-			returnvlue ='yes';
-		}
-		else if(document.frPerfect.EV_NUMBER.value.length <=5)
-		{
-			document.frPerfect.EV_NUMBER.focus();
-			returnvlue ='yes';
-		}
-		else if(document.frPerfect.EV_CODE.value.match( /^[A-Za-z][\w]*$/))
-		{
-			document.frPerfect.EV_CODE.focus();
-			returnvlue ='yes';
-		}
-		else if(document.frPerfect.EV_CODE.value.length <=5)
-		{
-			document.frPerfect.EV_CODE.focus();
-			returnvlue ='yes';
+		if(document.frPerfect.BATCH_NUMBER){
+			if(document.frPerfect.BATCH_NUMBER.value.match( /^[A-Za-z][\w]*$/))
+			{
+				document.frPerfect.BATCH_NUMBER.focus();
+				returnvlue ='yes';
+			}
+			else if(document.frPerfect.BATCH_NUMBER.value.length <=5)
+			{
+				document.frPerfect.BATCH_NUMBER.focus();
+				returnvlue ='yes';
+			}
+		}else{
+			if(document.frPerfect.EV_NUMBER.value.match( /^[A-Za-z][\w]*$/))
+			{
+				document.frPerfect.EV_NUMBER.focus();
+				returnvlue ='yes';
+			}
+			else if(document.frPerfect.EV_NUMBER.value.length <=5)
+			{
+				document.frPerfect.EV_NUMBER.focus();
+				returnvlue ='yes';
+			}
+			else if(document.frPerfect.EV_CODE.value.match( /^[A-Za-z][\w]*$/))
+			{
+				document.frPerfect.EV_CODE.focus();
+				returnvlue ='yes';
+			}
+			else if(document.frPerfect.EV_CODE.value.length <=5)
+			{
+				document.frPerfect.EV_CODE.focus();
+				returnvlue ='yes';
+			}
 		}
 		if(returnvlue == 'no')
 		{

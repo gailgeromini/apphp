@@ -36,6 +36,10 @@ class DepositController extends CController
 				$message=$model->depositBitcoinMethod($session->get('btc_address'));
 				$this->view->Messages = $message["message"];
 				$this->view->Mtype = $message["type"];
+			}elseif($cRequest->getPost('BATCH_NUMBER')){
+				$message=$model->depositBatchMethod($cRequest->getPost('BATCH_NUMBER'));
+				$this->view->Messages = $message["message"];
+				$this->view->Mtype = $message["type"];
 			}
 		}
 		$this->view->render('deposit/index');

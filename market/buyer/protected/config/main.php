@@ -82,6 +82,7 @@ return array(
 		),
 		'pm_method' => array(
 				'perfect_min_pay' => 5,
+				'perfect_account' => 'U4084297',
 		),
 		
 		'app_uri' => array(

@@ -135,4 +135,20 @@ class CRefactorProfile extends CModel
 			return $perfect;
 		}else return false;
 	}
+	
+	public static function handleNewestMember($id){
+	
+		$CModel = new CModel();
+		$result = $CModel->db->select('
+            SELECT *
+            FROM '.CConfig::get('db.prefix').'payments
+            WHERE '.CConfig::get('db.prefix').'payments.user_id = :id',
+				array(':id' => (int)$id)
+		);
+		if(count($result) < 4){
+			return false;
+		}else{
+			return true;
+		}
+	}
 }
